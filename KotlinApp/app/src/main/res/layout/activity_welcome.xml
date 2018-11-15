@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <import type="android.view.View" />
+
+        <variable
+            name="view"
+            type="com.open.app.ui.activity.WelcomeActivity"/>
+
+        <variable
+            name="viewmodel"
+            type="com.open.app.viewmodel.WelcomeViewModel" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/cashalo_welcome_bg" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:layout_margin="@dimen/margin_ten"
+            android:id="@+id/txtVersion"
+            android:text="@{viewmodel.getVersionName}"
+            />
+        <com.open.app.widget.CountdownTextView
+            android:layout_width="64dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/countTimer"
+            android:textColor="@color/ori_text_secondary"
+            android:layout_alignParentRight="true"
+            android:textSize="16dp"
+            android:padding="10dp"
+            android:background="@drawable/ori_shape_btn_skip_round"
+            android:gravity="center"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            />
+    </RelativeLayout>
+
+</layout>
