@@ -1,5 +1,10 @@
 package com.open.app.model.service
 
+import com.open.app.model.data.LastestBean
+import com.open.app.model.rx.ResponseCallback
+import com.open.app.model.rx.RetrofitManager
+import retrofit2.Call
+
 
 /**
  * ****************************************************************************************************************************************************************************
@@ -12,6 +17,16 @@ package com.open.app.model.service
  * @description:
  * ****************************************************************************************************************************************************************************
  */
-class ContactService(){
+class ContactService() {
+
+    companion object {
+
+        @JvmStatic
+        fun latest(callback: ResponseCallback<LastestBean>) {
+            var call:Call<LastestBean> = RetrofitManager.getService(Api::class.java)
+                    .latest()
+            RetrofitManager.enqueueAdapter(call,callback)
+        }
+    }
 
 }

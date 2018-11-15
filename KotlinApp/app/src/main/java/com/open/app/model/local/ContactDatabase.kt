@@ -52,7 +52,7 @@ class ContactDatabase(){
                     }finally {
 
                     }
-                    list.add(ContactBean(name,numbers))
+                    list.add(ContactBean(name,numbers,""))
                 }while (cursor.moveToNext())
             }
             cursor.close()

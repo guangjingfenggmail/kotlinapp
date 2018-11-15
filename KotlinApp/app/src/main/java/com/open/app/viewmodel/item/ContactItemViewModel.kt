@@ -30,7 +30,7 @@ class ContactItemViewModel : BaseObservable {
     @Bindable
     fun getUserName(): String {
         var bean: ContactBean? = contact.get()
-        return bean?.name?:""
+        return bean?.title?:""
     }
 
     @Bindable
