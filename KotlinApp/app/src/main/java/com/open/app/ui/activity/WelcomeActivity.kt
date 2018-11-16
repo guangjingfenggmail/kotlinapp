@@ -32,7 +32,7 @@ class WelcomeActivity : AppCompatActivity(),CountdownCompleteCallback {
 
     override fun onCompleteCallback() {
         var intent:Intent = Intent()
-        intent.setClass(this,ContactActivity::class.java)
+        intent.setClass(this,EntryGuiderActivity::class.java)
         startActivity(intent)
         finish()
     }

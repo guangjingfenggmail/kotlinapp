@@ -11,9 +11,13 @@ import com.open.app.model.data.CommonPagerBean
 class EntryGuiderViewModel: BaseObservable() {
     var items:ObservableList<CommonPagerBean> = ObservableArrayList<CommonPagerBean>()
 
+    companion object {
+        @JvmStatic
+        @BindingAdapter("items")
+        public fun setItems(viewPager: ViewPager,items:List<CommonPagerBean>){
 
-    @BindingAdapter("items")
-    public fun setItems(viewPager: ViewPager,items:List<CommonPagerBean>){
-
+        }
     }
+
+
 }
