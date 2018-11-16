@@ -6,7 +6,7 @@ import android.widget.ListView
 import com.open.app.BR
 import com.open.app.model.data.ContactBean
 import com.open.app.model.data.LastestBean
-import com.open.app.model.rx.ResponseCallback
+import com.open.app.model.rx.callback.ResponseCallback
 import com.open.app.model.service.ContactService
 import com.open.app.ui.adapter.ContactAdapter
 import retrofit2.Call
@@ -48,7 +48,7 @@ class ContactViewModel(var mContext: Context) : BaseObservable() {
     }
 
 
-   inner class ContactCallback:ResponseCallback<LastestBean>{
+   inner class ContactCallback: ResponseCallback<LastestBean> {
 
         override fun onResponse(call: Call<LastestBean>, response: Response<LastestBean>) {
             var  bean: LastestBean? = response.body()
@@ -61,6 +61,9 @@ class ContactViewModel(var mContext: Context) : BaseObservable() {
 
         }
     }
+
+
+
 
 
 }

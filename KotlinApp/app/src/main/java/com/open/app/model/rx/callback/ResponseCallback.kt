@@ -1,6 +1,8 @@
-package com.open.app.model.rx
+package com.open.app.model.rx.callback
 
-import java.io.Serializable
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 /**
@@ -14,14 +16,13 @@ import java.io.Serializable
  * @description:
  * ****************************************************************************************************************************************************************************
  */
-class BaseHttpResult<T>(var status:Int,var message:String,var data:T) :Serializable{
+interface ResponseCallback<T> : Callback<T> {
 
-    override fun toString(): String {
-        return "BaseHttpResult{" +
-                "status:" +status
-                ",message:" +message
-                ",data:" +data
-                "}"
+    override fun onResponse(call: Call<T>, response: Response<T>) {
+
     }
 
+    override fun onFailure(call: Call<T>, t: Throwable) {
+
+    }
 }

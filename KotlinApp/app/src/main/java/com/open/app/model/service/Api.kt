@@ -1,8 +1,11 @@
 package com.open.app.model.service
 
 import com.open.app.model.data.LastestBean
+import com.open.app.model.data.NewsInfoBean
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Path
+import rx.Observable
 
 
 /**
@@ -19,6 +22,10 @@ import retrofit2.http.GET
 interface Api {
 
     @GET("news/latest")
-    fun latest() :Call<LastestBean>
+    fun latest(): Call<LastestBean>
+
+
+    @GET("news/{id}")
+    fun getNewsInfo(@Path("id") id: String): Observable<NewsInfoBean>
 
 }

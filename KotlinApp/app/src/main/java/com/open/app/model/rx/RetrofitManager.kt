@@ -1,5 +1,6 @@
 package com.open.app.model.rx
 
+import com.open.app.model.rx.callback.ResponseCallback
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
