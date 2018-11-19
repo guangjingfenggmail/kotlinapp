@@ -16,7 +16,6 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="@{viewmodel.onItemClick}"
         >
 
         <ImageView
@@ -24,8 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="fitCenter"
-            android:src="@mipmap/welcome_bg"
-            />
+            app:src2="@{viewmodel.getImageUrl}" />
 
         <TextView
             android:id="@+id/txtSave"
@@ -36,7 +34,8 @@
             android:layout_margin="20dp"
             android:background="#000000"
             android:text="保存"
-            android:textColor="#ffffff" />
+            android:textColor="#ffffff"
+            android:visibility="@{viewmodel.isVisiable ? View.VISIBLE : View.GONE}" />
 
     </RelativeLayout>
 </layout>

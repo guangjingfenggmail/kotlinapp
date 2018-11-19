@@ -6,4 +6,5 @@ class CommonPagerBean : Serializable {
     var resId: Int = 0
     var imageName: String = ""
     var imageUrl: String = ""
+    var visiable:Boolean = false
 }

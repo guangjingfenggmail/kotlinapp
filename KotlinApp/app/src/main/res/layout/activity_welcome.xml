@@ -6,7 +6,7 @@
         <import type="android.view.View" />
 
         <variable
-            name="view"
+            name="event"
             type="com.open.app.ui.activity.WelcomeActivity"/>
 
         <variable
@@ -15,9 +15,15 @@
 
     </data>
 
+    <!--
+    android:onClick="@{(view) -> event.onClick(view,viewmodel)}"
+    android:onClick="@{event::onClick}"
+    android:onClick="@{event.onClick}"
+    -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:onClick="@{(view) -> event.onClick(view,viewmodel)}"
         android:background="@mipmap/welcome_bg" >
 
         <TextView
@@ -26,6 +32,7 @@
             android:layout_alignParentBottom="true"
             android:gravity="center"
             android:textColor="@android:color/white"
+            android:onClick="@{event::onClick}"
             android:layout_margin="@dimen/margin_ten"
             android:id="@+id/txtVersion"
             android:text="@{viewmodel.getVersionName}"
@@ -33,7 +40,7 @@
         <com.open.app.widget.CountdownTextView
             android:layout_width="64dp"
             android:layout_height="wrap_content"
-            android:id="@+id/countTimer"
+            android:id="@+id/countTimerView"
             android:textColor="@color/ori_text_secondary"
             android:layout_alignParentRight="true"
             android:textSize="16dp"

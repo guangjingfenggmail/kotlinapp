@@ -31,6 +31,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:visibility="visible"
+            app:listener2="@{viewmodel.i}"
             app:items="@{viewmodel.items}" />
     </RelativeLayout>
 

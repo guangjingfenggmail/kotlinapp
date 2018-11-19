@@ -61,8 +61,17 @@ public class CountdownTextView : TextView {
         }
     }
 
-    public fun start() {
+    fun start() {
         mTimer?.schedule(mTimerTask, 0, 1000)
+    }
+
+
+    fun stop(){
+        if (mTimerTask != null)
+            mTimerTask?.cancel()
+
+        if (mTimer != null)
+            mTimer.cancel()
     }
 
     private var mHandler: Handler = object : Handler(Looper.getMainLooper()) {
@@ -90,7 +99,7 @@ public class CountdownTextView : TextView {
     }
 
 
-    public interface CountdownCompleteCallback {
+    interface CountdownCompleteCallback {
         fun onCompleteCallback()
     }
 

@@ -1,9 +1,12 @@
 package com.open.app.ui.adapter
 
 import android.content.Context
+import android.databinding.DataBindingUtil
+import android.databinding.ViewDataBinding
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.open.app.R
 import com.open.app.databinding.AdapterImageViewpagerBinding
 import com.open.app.model.data.CommonPagerBean
 import com.open.app.viewmodel.item.EntrIytemPagerViewModel
@@ -29,8 +32,10 @@ class EntryGuiderPagerAdapter : CommonPagerAdapter<CommonPagerBean> {
 
     override fun instantiateItem(container: ViewGroup, position: Int): View {
 //        return super.instantiateItem(container, position)
-        var binding: AdapterImageViewpagerBinding =
-                AdapterImageViewpagerBinding.inflate(LayoutInflater.from(context), container, false)
+        var binding:AdapterImageViewpagerBinding
+
+//        binding= AdapterImageViewpagerBinding.inflate(LayoutInflater.from(context), container, false)
+        binding= DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.adapter_image_viewpager,container, false)
 
         var viewModel: EntrIytemPagerViewModel = EntrIytemPagerViewModel()
         binding.viewmodel = viewModel

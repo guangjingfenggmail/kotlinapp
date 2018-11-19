@@ -10,8 +10,7 @@ import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import com.open.app.model.data.CommonPagerBean
-import com.open.app.ui.activity.ContactActivity
-import com.open.app.ui.activity.EntryGuiderActivity
+import com.squareup.picasso.Picasso
 
 /**
  * ****************************************************************************************************************************************************************************
@@ -39,16 +38,8 @@ class EntrIytemPagerViewModel : BaseObservable {
         @JvmStatic
         @BindingAdapter("src2")
         fun setImage(imageView: ImageView, imageUrl: String) {
-
+            Picasso.with(imageView.getContext()).load(imageUrl).into(imageView)
         }
-    }
-
-    fun onItemClick(view: View) {
-        var intent: Intent = Intent()
-        intent.setClass(view.context, ContactActivity::class.java)
-        view.context.startActivity(intent)
-        (view.context as Activity).finish()
-        Log.d("EntrIytemPagerViewModel","onItemClick")
     }
 
 
@@ -62,6 +53,12 @@ class EntrIytemPagerViewModel : BaseObservable {
     fun getImageName(): String {
         var data: CommonPagerBean? = pager?.get()
         return data?.imageName ?: ""
+    }
+
+    @Bindable
+    fun isVisiable(): Boolean {
+        var data: CommonPagerBean? = pager?.get()
+        return data?.visiable ?: false
     }
 
 }
