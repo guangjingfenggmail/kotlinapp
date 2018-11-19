@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="LockPatternView">
+        <attr name="defaultPaintColor" format="color"/>
+        <attr name="defaultStrokeWidth" format="integer"/>
+
+        <attr name="selectPaintColor" format="color"/>
+        <attr name="selectStrokeWidth" format="integer"/>
+
+        <attr name="errorPaintColor" format="color"/>
+        <attr name="errorStrokeWidth" format="integer"/>
+
+    </declare-styleable>
+
+
+    <declare-styleable name="LockPatternIndicator">
+
+        <attr name="pattern_defaultPaintColor" format="color"/>
+        <attr name="pattern_defaultStrokeWidth" format="integer"/>
+        <attr name="pattern_selectPaintColor" format="color"/>
+
+    </declare-styleable>
+</resources>

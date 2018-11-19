@@ -25,7 +25,7 @@ import java.util.ArrayList
  *
  * *****************************************************************************************************************************************************************************
  **/
-class LockPatternView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : View(context, attrs, defStyleAttr) {
+class LockPatternView : View {
 
     private var movingX: Float = 0.toFloat()
     private var movingY: Float = 0.toFloat()
@@ -70,25 +70,64 @@ class LockPatternView @JvmOverloads constructor(context: Context, attrs: Attribu
     lateinit var trianglePath: Path
     lateinit var triangleMatrix: Matrix
 
-    private var mCells : Array<Array<Cell>> = Array(3) { arrayOf(Cell(),Cell(),Cell()) }
+    var defaultPaintColor:Int = getResources().getColor(R.color.blue_78d2f6)
+    var selectPaintColor:Int = getResources().getColor(R.color.blue_00aaee)
+    var errorPaintColor:Int = getResources().getColor(R.color.red_f3323b)
+    var defaultStrokeWidth:Int = 2
+
+    private var mCells: Array<Array<Cell>> = Array(3) { arrayOf(Cell(), Cell(), Cell()) }
     private var sCells = ArrayList<Cell>()
     private var patterListener: OnPatternListener? = null
 
     private val mClearPatternRunnable = Runnable { this@LockPatternView.setPattern(DisplayMode.DEFAULT) }
 
-    init {
-        this.init()
+    constructor(context: Context) : this(context, null) {
+    }
+
+    constructor(context: Context, attrs: AttributeSet? = null) : this(context, attrs, 0) {
+    }
+
+    constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : super(context, attrs, defStyleAttr) {
+        init(attrs)
     }
 
     /**
      * initialize
      */
-    private fun init() {
+    private fun init(attrs: AttributeSet? = null) {
         this.initCellSize()
         this.init9Cells()
-        this.initPaints()
+        this.initPaints(attrs)
         this.initPaths()
         this.initMatrixs()
+    }
+
+
+    /**
+     * initialize paints
+     */
+    private fun initPaints(attrs: AttributeSet? = null) {
+        val ta = context.obtainStyledAttributes(attrs, R.styleable.LockPatternView)
+
+        defaultPaint = Paint()
+        defaultPaint!!.color = ta.getColor(R.styleable.LockPatternView_defaultPaintColor,  defaultPaintColor);
+        defaultPaint!!.strokeWidth = ta.getInteger(R.styleable.LockPatternView_defaultStrokeWidth, defaultStrokeWidth).toFloat()
+        defaultPaint!!.style = Paint.Style.STROKE
+        defaultPaint!!.isAntiAlias = true
+
+        selectPaint = Paint()
+        selectPaint!!.color = ta.getColor(R.styleable.LockPatternView_selectPaintColor,  selectPaintColor);
+        selectPaint!!.strokeWidth = ta.getInteger(R.styleable.LockPatternView_selectStrokeWidth, defaultStrokeWidth).toFloat()
+        //selectPaint.setStyle(Style.STROKE);
+        selectPaint!!.isAntiAlias = true
+
+        errorPaint = Paint()
+        errorPaint!!.color = ta.getColor(R.styleable.LockPatternView_errorPaintColor,  errorPaintColor);
+        errorPaint!!.strokeWidth = ta.getInteger(R.styleable.LockPatternView_errorStrokeWidth, defaultStrokeWidth).toFloat()
+        //errorPaint.setStyle(Style.STROKE);
+        errorPaint!!.isAntiAlias = true
+
+        ta.recycle()
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -229,28 +268,7 @@ class LockPatternView @JvmOverloads constructor(context: Context, attrs: Attribu
         }
     }
 
-    /**
-     * initialize paints
-     */
-    private fun initPaints() {
-        defaultPaint = Paint()
-        defaultPaint!!.color = resources.getColor(R.color.blue_78d2f6)
-        defaultPaint!!.strokeWidth = 2.0f
-        defaultPaint!!.style = Paint.Style.STROKE
-        defaultPaint!!.isAntiAlias = true
 
-        selectPaint = Paint()
-        selectPaint!!.color = resources.getColor(R.color.blue_00aaee)
-        selectPaint!!.strokeWidth = 3.0f
-        //selectPaint.setStyle(Style.STROKE);
-        selectPaint!!.isAntiAlias = true
-
-        errorPaint = Paint()
-        errorPaint!!.color = resources.getColor(R.color.red_f3323b)
-        errorPaint!!.strokeWidth = 3.0f
-        //errorPaint.setStyle(Style.STROKE);
-        errorPaint!!.isAntiAlias = true
-    }
 
     /**
      * initialize paths
@@ -651,7 +669,7 @@ class LockPatternView @JvmOverloads constructor(context: Context, attrs: Attribu
         fun onPatternComplete(cells: List<Cell>)
     }
 
-      class Cell {
+    class Cell {
 
         var x: Int = 0// the x position of circle's center point
         var y: Int = 0// the y position of circle's center point
@@ -674,15 +692,15 @@ class LockPatternView @JvmOverloads constructor(context: Context, attrs: Attribu
 
             //default status
             @JvmStatic
-             val STATE_NORMAL = 0
+            val STATE_NORMAL = 0
 
             //checked status
             @JvmStatic
-             val STATE_CHECK = 1
+            val STATE_CHECK = 1
 
             //checked error status
             @JvmStatic
-             val STATE_CHECK_ERROR = 2
+            val STATE_CHECK_ERROR = 2
         }
 
     }

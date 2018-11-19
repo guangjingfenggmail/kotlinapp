@@ -19,7 +19,7 @@ import com.open.app.R
  *
  * *****************************************************************************************************************************************************************************
  **/
-class LockPatternIndicator @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0): View(context, attrs, defStyleAttr) {
+class LockPatternIndicator  : View{
     private var mWidth: Int = 0
     private var mHeight: Int = 0
     private var cellBoxWidth: Int = 0
@@ -30,15 +30,25 @@ class LockPatternIndicator @JvmOverloads constructor(context: Context, attrs: At
     private var selectPaint: Paint? = null
     private val mIndicatorCells = Array<Array<IndicatorCell?>>(3) { arrayOfNulls(3) }
 
-    init {
-        this.init()
+    var defaultPaintColor:Int = getResources().getColor(R.color.grey_b2b2b2)
+    var selectPaintColor:Int = getResources().getColor(R.color.blue_01aaee)
+    var defaultStrokeWidth:Int = 3
+
+    constructor(context: Context) : this(context, null) {
+    }
+
+    constructor(context: Context, attrs: AttributeSet? = null) : this(context, attrs, 0) {
+    }
+
+    constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : super(context, attrs, defStyleAttr) {
+        init(attrs)
     }
 
 
-    private fun init() {
+    private fun init(attrs: AttributeSet? = null) {
         //initViewSize(context, attrs);
         initRadius()
-        initPaint()
+        initPaint(attrs)
         init9IndicatorCells()
     }
 
@@ -75,18 +85,21 @@ class LockPatternIndicator @JvmOverloads constructor(context: Context, attrs: At
         this.cellBoxWidth = (this.mWidth - offset * 2) / 3
     }
 
-    private fun initPaint() {
+    private fun initPaint(attrs: AttributeSet? = null) {
+        val ta = context.obtainStyledAttributes(attrs, R.styleable.LockPatternIndicator)
         defaultPaint = Paint()
-        defaultPaint!!.color = resources.getColor(R.color.grey_b2b2b2)
-        defaultPaint!!.strokeWidth = 3.0f
+        defaultPaint!!.color = ta.getColor(R.styleable.LockPatternIndicator_pattern_defaultPaintColor,  defaultPaintColor)
+        defaultPaint!!.strokeWidth = ta.getInteger(R.styleable.LockPatternIndicator_pattern_defaultStrokeWidth, defaultStrokeWidth).toFloat()
         defaultPaint!!.style = Paint.Style.STROKE
         defaultPaint!!.isAntiAlias = true
 
         selectPaint = Paint()
-        selectPaint!!.color = resources.getColor(R.color.blue_01aaee)
-        selectPaint!!.strokeWidth = 3.0f
+        selectPaint!!.color = ta.getColor(R.styleable.LockPatternIndicator_pattern_selectPaintColor,  selectPaintColor)
+        selectPaint!!.strokeWidth = ta.getInteger(R.styleable.LockPatternIndicator_pattern_defaultStrokeWidth, defaultStrokeWidth).toFloat()
         selectPaint!!.style = Paint.Style.FILL
         selectPaint!!.isAntiAlias = true
+
+        ta.recycle()
     }
 
     /**
