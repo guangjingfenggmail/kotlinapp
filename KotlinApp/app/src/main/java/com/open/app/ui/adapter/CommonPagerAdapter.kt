@@ -4,6 +4,7 @@ import android.content.Context
 import android.support.v4.view.PagerAdapter
 import android.view.View
 import android.view.ViewGroup
+import com.open.app.model.data.CommonPagerBean
 
 /**
  * ****************************************************************************************************************************************************************************
@@ -50,5 +51,10 @@ open class CommonPagerAdapter<T> : PagerAdapter {
 
     override fun getCount(): Int {
         return list?.size ?: 0
+    }
+
+    fun updateUI(list: List<T>) {
+        this.list = list
+        notifyDataSetChanged()
     }
 }

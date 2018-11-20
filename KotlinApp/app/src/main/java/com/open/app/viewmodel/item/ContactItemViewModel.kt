@@ -2,12 +2,15 @@ package com.open.app.viewmodel.item
 
 import android.databinding.BaseObservable
 import android.databinding.Bindable
+import android.databinding.BindingAdapter
 import android.databinding.ObservableField
 import android.view.View
+import android.widget.ImageView
 import com.open.app.model.data.ContactBean
 import com.open.app.model.data.NewsInfoBean
 import com.open.app.model.rx.callback.ResponseCallback
 import com.open.app.model.service.ContactService
+import com.squareup.picasso.Picasso
 import retrofit2.Call
 import retrofit2.Response
 
@@ -39,6 +42,20 @@ class ContactItemViewModel : BaseObservable {
         return bean?.title ?: ""
     }
 
+    companion object {
+        @JvmStatic
+        @BindingAdapter("src2")
+        fun setImage(imageView: ImageView, imageUrl: String) {
+            Picasso.with(imageView.getContext()).load(imageUrl).into(imageView)
+        }
+    }
+
+    @Bindable
+    fun getImageUrl(): String {
+        var bean: ContactBean? = contact.get()
+        return bean?.images?.get(0) ?: ""
+    }
+
     @Bindable
     fun getMobile(): String {
         var bean: ContactBean? = contact.get()
@@ -53,21 +70,21 @@ class ContactItemViewModel : BaseObservable {
         return ""
     }
 
-    fun onItemClick(view: View) {
-        var bean: ContactBean? = contact.get()
-        var id: String = bean?.id ?: ""
-//        ContactService.getNewsInfo(id, ContactItemCallback())
-
-        ContactService.getNewsInfo(id, object :ResponseCallback<NewsInfoBean>{
-            override fun onFailure(call: Call<NewsInfoBean>, t: Throwable) {
-                super.onFailure(call, t)
-            }
-
-            override fun onResponse(call: Call<NewsInfoBean>, response: Response<NewsInfoBean>) {
-                super.onResponse(call, response)
-            }
-        })
-    }
+//    fun onItemClick(view: View) {
+//        var bean: ContactBean? = contact.get()
+//        var id: String = bean?.id ?: ""
+////        ContactService.getNewsInfo(id, ContactItemCallback())
+//
+//        ContactService.getNewsInfo(id, object :ResponseCallback<NewsInfoBean>{
+//            override fun onFailure(call: Call<NewsInfoBean>, t: Throwable) {
+//                super.onFailure(call, t)
+//            }
+//
+//            override fun onResponse(call: Call<NewsInfoBean>, response: Response<NewsInfoBean>) {
+//                super.onResponse(call, response)
+//            }
+//        })
+//    }
 
 
 //    override fun onFailure(call: Call<NewsInfoBean>, t: Throwable) {

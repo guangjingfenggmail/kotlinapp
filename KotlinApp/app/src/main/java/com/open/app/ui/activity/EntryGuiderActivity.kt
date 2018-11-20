@@ -6,8 +6,10 @@ import android.os.Bundle
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.View
 import com.open.app.R
 import com.open.app.databinding.ActivityEntryGuiderBinding
+import com.open.app.generated.callback.OnClickListener
 import com.open.app.model.data.CommonPagerBean
 import com.open.app.ui.adapter.EntryGuiderPagerAdapter
 import com.open.app.viewmodel.EntryGuiderViewModel
@@ -16,16 +18,15 @@ import kotlinx.android.synthetic.main.activity_entry_guider.*
 /**
  *viewpager
  */
-public class EntryGuiderActivity : AppCompatActivity() {
+public class EntryGuiderActivity : AppCompatActivity(),ViewPager.OnPageChangeListener {
     lateinit var binding: ActivityEntryGuiderBinding
     lateinit var list: MutableList<CommonPagerBean>
-//    var misScrolled: Boolean = false
+    var misScrolled: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this@EntryGuiderActivity, R.layout.activity_entry_guider)
-
         var viewModel: EntryGuiderViewModel = EntryGuiderViewModel()
         binding.view = this
         binding.viewmodel = viewModel
@@ -48,40 +49,53 @@ public class EntryGuiderActivity : AppCompatActivity() {
         var adapter: EntryGuiderPagerAdapter = EntryGuiderPagerAdapter(this, list)
         var viewPager: ViewPager = viewPager
         viewPager.adapter = adapter
-//        viewPager.addOnPageChangeListener(this)
+//        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{
+//            override fun onPageScrollStateChanged(p0: Int) {
+//
+//            }
+//
+//            override fun onPageScrolled(p0: Int, p1: Float, p2: Int) {
+//
+//            }
+//
+//            override fun onPageSelected(p0: Int) {
+//
+//            }
+//        })
+        viewPager.addOnPageChangeListener(this)
     }
 
 
-//    fun toContact() {
-//        var intent: Intent = Intent()
-//        intent.setClass(this, ContactActivity::class.java)
-//        startActivity(intent)
-//        finish()
-//        Log.d("EntryGuiderActivity", "toContact")
-//    }
+    fun toContact() {
+        var intent: Intent = Intent()
+        intent.setClass(this, ContactActivity::class.java)
+        startActivity(intent)
+        finish()
+        Log.d("EntryGuiderActivity", "toContact")
+    }
 
 
-//    override fun onPageScrollStateChanged(p0: Int) {
-//        when (p0) {
-//            ViewPager.SCROLL_STATE_DRAGGING ->
-//                misScrolled = false
-//            ViewPager.SCROLL_STATE_SETTLING ->
-//                misScrolled = true;
-//            ViewPager.SCROLL_STATE_IDLE -> {
-//                if (viewPager.getCurrentItem() == viewPager.adapter!!.count - 1 && !misScrolled) {
-//                    toContact()
-//                }
-//                misScrolled = true
-//            }
-//        }
-//    }
-//
-//    override fun onPageScrolled(p0: Int, p1: Float, p2: Int) {
-//
-//    }
-//
-//    override fun onPageSelected(p0: Int) {
-//
-//    }
+    override fun onPageScrollStateChanged(p0: Int) {
+        when (p0) {
+            ViewPager.SCROLL_STATE_DRAGGING ->
+                misScrolled = false
+            ViewPager.SCROLL_STATE_SETTLING ->
+                misScrolled = true;
+            ViewPager.SCROLL_STATE_IDLE -> {
+                if (viewPager.getCurrentItem() == viewPager.adapter!!.count - 1 && !misScrolled) {
+                    toContact()
+                }
+                misScrolled = true
+            }
+        }
+    }
+
+    override fun onPageScrolled(p0: Int, p1: Float, p2: Int) {
+
+    }
+
+    override fun onPageSelected(p0: Int) {
+
+    }
 
 }

@@ -13,6 +13,6 @@ package com.open.app.model.data
  * ****************************************************************************************************************************************************************************
  */
 
-class ContactBean(var title:String,var phones:List<String>,var id:String){
-
+class ContactBean(var title: String, var phones: List<String>, var id: String) {
+    var images: List<String> = listOf()
 }

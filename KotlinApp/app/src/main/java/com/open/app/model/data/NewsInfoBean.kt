@@ -20,6 +20,6 @@ class NewsInfoBean() : Serializable {
     var image_source: String? = null
     var title: String? = null
     var image: String? = null
-    var share_url: List<String>? = null
+//    var share_url: List<String>? = null
 
 }

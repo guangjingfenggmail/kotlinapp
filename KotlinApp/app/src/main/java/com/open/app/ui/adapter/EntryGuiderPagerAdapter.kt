@@ -31,9 +31,7 @@ class EntryGuiderPagerAdapter : CommonPagerAdapter<CommonPagerBean> {
     }
 
     override fun instantiateItem(container: ViewGroup, position: Int): View {
-//        return super.instantiateItem(container, position)
         var binding:AdapterImageViewpagerBinding
-
 //        binding= AdapterImageViewpagerBinding.inflate(LayoutInflater.from(context), container, false)
         binding= DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.adapter_image_viewpager,container, false)
 
@@ -46,7 +44,6 @@ class EntryGuiderPagerAdapter : CommonPagerAdapter<CommonPagerBean> {
 
 
     override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
-//        super.destroyItem(container, position, `object`)
         container.removeView(`object` as View?)
     }
 
@@ -56,9 +53,6 @@ class EntryGuiderPagerAdapter : CommonPagerAdapter<CommonPagerBean> {
     }
 
 
-    fun updateUI(list: List<CommonPagerBean>) {
-        this.list = list
-        notifyDataSetChanged()
-    }
+
 
 }

@@ -15,17 +15,23 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:onClick="@{viewmodel::onItemClick}"
+        android:descendantFocusability="blocksDescendants"
         android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="60dp"
+            android:id="@+id/imageView"
+            app:src2="@{viewmodel.getImageUrl}"
+            />
 
         <TextView
             android:id="@+id/txtName"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:padding="10dp"
             android:textSize="16dp"
             android:gravity="center|left"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:text="@{viewmodel.getUserName}" />
 
         <TextView
@@ -35,7 +41,7 @@
             android:textSize="16dp"
             android:gravity="center|left"
             android:layout_height="match_parent"
-            android:layout_weight="2"
+            android:layout_weight="0"
             android:text="@{viewmodel.getMobile}" />
     </LinearLayout>
 
